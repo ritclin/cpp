@@ -1,0 +1,30 @@
+{% include 'orders/navbar.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Reference Image</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Edit Reference Image</h2>
+
+    {% if order.reference_image_url %}
+        <p>Current Image:</p>
+        <img src="{{ order.reference_image_url }}" alt="Current Reference" width="120">
+    {% else %}
+        <p>No image uploaded yet.</p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="mt-3">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="reference_image" class="form-label">Choose New Image</label>
+            <input type="file" name="reference_image" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload New Image</button>
+        <a href="{% url 'order_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% include 'orders/navbar.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Cost Summary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Order Cost Summary</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Product: {{ order.product.name }}</h5>
+            <p><strong>Supplier:</strong>{{ order.supplier.name }}</p>
+            <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            Cost Breakdown
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Base Cost: €{{ cost.base_cost }}</li>
+            <li class="list-group-item">Discount: -€{{ cost.discount }}</li>
+            <li class="list-group-item">Tax: +€{{ cost.tax }}</li>
+            <li class="list-group-item fw-bold">Total: €{{ cost.total }}</li>
+        </ul>
+    </div>
+
+    <a href="{% url 'order_list' %}" class="btn btn-secondary mt-4">Back to Orders</a>
+</div>
+</body>
+</html>
