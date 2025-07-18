@@ -98,8 +98,8 @@ DATABASES = {
         'USER': "riteshclinton",
         'PASSWORD': "RiteshClinton",
         'HOST': client.get_secret_value(
-            SecretId="dbhost"
-        ),
+            SecretId="cpp-dbhost"
+        )['SecretString'],
         'PORT':"5432",
     }
 }
