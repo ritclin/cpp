@@ -3,7 +3,7 @@ import json
 from django.conf import settings
 
 def send_order_event(order, event_type):
-    sqs = boto3.client('sqs')
+    sqs = boto3.client('sqs', region_name=settings.AWS_REGION)
 
     payload = {
         "order_id": order.id,
