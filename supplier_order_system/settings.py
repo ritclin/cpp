@@ -94,12 +94,10 @@ WSGI_APPLICATION = 'supplier_order_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "cppdatabase",
-        'USER': "riteshclinton",
-        'PASSWORD': "RiteshClinton",
-        'HOST': client.get_secret_value(
-            SecretId="cpp-dbhost"
-        )['SecretString'],
+        'NAME': client.get_secret_value(SecretId="cpp-dbdatabase")['SecretString'],
+        'USER': client.get_secret_value(SecretId="cpp-dbuser")['SecretString'],
+        'PASSWORD': client.get_secret_value(SecretId="cpp-dbpassword")['SecretString'],
+        'HOST': client.get_secret_value(SecretId="cpp-dbhost")['SecretString'],
         'PORT':"5432",
     }
 }
