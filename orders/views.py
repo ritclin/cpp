@@ -144,8 +144,8 @@ def order_cost_view(request, order_id):
     calc = OrderCostCalculator(
         price_per_unit=order.product.price_per_unit,
         quantity=order.quantity,
-        tax_percent=0,          # or fetch from DB/config
-        discount_percent=0      # or based on supplier/promo
+        tax_percent=0,          
+        discount_percent=0
     )
 
     cost = calc.breakdown()

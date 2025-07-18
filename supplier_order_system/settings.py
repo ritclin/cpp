@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+# aws secrets manager
+import boto3
+AWS_REGION = "us-east-1"
+session = boto3.session.Session()
+client = session.client(
+        service_name='secretsmanager',
+        region_name=AWS_REGION
+    )
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,7 +97,9 @@ DATABASES = {
         'NAME': "cppdatabase",
         'USER': "riteshclinton",
         'PASSWORD': "RiteshClinton",
-        'HOST': "database-1.csnwgv7yvv0r.us-east-1.rds.amazonaws.com",
+        'HOST': client.get_secret_value(
+            SecretId="dbhost"
+        ),
         'PORT':"5432",
     }
 }
@@ -139,7 +150,6 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
 # aws credentials
-AWS_REGION = "us-east-1"
 # AWS_ACCESS_KEY_ID = 
 # AWS_SECRET_ACCESS_KEY = 
 # AWS_SESSION_TOKEN = 
